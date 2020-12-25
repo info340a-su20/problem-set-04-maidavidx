@@ -2,17 +2,22 @@
 
 /* Define a function `addFour()` that takes a single argument 
    and returns a value 4 greater than the input.*/
-
+function addFour(number) {
+  return number + 4;
+}
    
 /* Create and log a variable `twelve` that is the result of passing 8 to your
    addFour() function. */
-
+let twelve = addFour(8);
+console.log(twelve);
    
 /* Create and log a variable `twelveString` that is the result of passing "8" 
    (a string) to your addFour() function. Consider what this tells you about how
   the function should be explained (e.g., in a comment). */
-
-  
+let twelveString = addFour("8");
+console.log(twelveString);
+/* It seems the 4 was converted to a string and added onto the end of the parameter being passed
+    in (another string) */
 
 /* Define a function `compoundInterest()` that takes three parameters: 
      1. an initial bank balance (principle, in dollars)
@@ -25,8 +30,11 @@
    You can call the method and log the result to check your work. Compare to
      http://www.mathwarehouse.com/calculators/continuous-compound-interest-calculator.php
 */
+function compoundInterest(principle, rate, years) {
+  return principle * (Math.pow(Math.E, (rate * years)));
+}
 
-
+console.log(compoundInterest(100, 0.04, 6));
 
 /* Define a function `fizzBuzz()` that takes in a single number as an argument.
    The function should *return* an _array_ of numbers from 1 to the argument. 
@@ -36,6 +44,21 @@
    should contain "FizzBuzz" instead of the number.
    The returned array should be empty for arguments less than 1. */
 
+function fizzBuzz(number) {
+  let nums = [];
+    for (let i = 1; i <= number; i++) {
+      if (i % 5 === 0 && i % 3 === 0) {
+        nums.push('FizzBuzz');
+      } else if (i % 3 === 0) {
+        nums.push('Fizz');
+      } else if (i % 5 === 0) {
+        nums.push('Buzz');
+      } else {
+      nums.push(i);
+      }
+    }
+    return nums;
+}
    
 
 /* Define a function `getLetterFrequencies()` that takes in a single string as 
@@ -47,7 +70,17 @@
    each letter, increase the value associated with that key by one. Watch out 
    for if the letter is not in the Object yet!
    You can test this method with a word like "Mississippi". */
-
+function getLetterFrequencies(str) {
+  let letters = {};
+  for (let i = 0; i < str.length; i++) {
+    if (letters[str.charAt(i)] >= 1) {
+      letters[str.charAt(i)]++;
+    } else {
+      letters[str.charAt(i)] = 1;
+    }
+  }
+  return letters;
+}
    
 
 /* Create a variable `deck` that represents a deck of modern playing cards
@@ -66,24 +99,53 @@
 
 //You can test the below functions by creating e.g., a `pokerHand` array that 
 //contains five cards from the `deck`.
+let deck = [];
+for (let i = 2; i <= 14; i++) {
+  deck.push({suit: "hearts", rank: i});
+  deck.push({suit: "diamonds", rank: i});
+  deck.push({suit: "clubs", rank: i});
+  deck.push({suit: "spades", rank: i});
+}
 
 /* Define a function `containsQueenOfHearts()` that takes in an array of "card"
    objects (e.g., a Poker hand) and returns whether or not the Queen of Hearts
    is in that array.
    Hint: use a loop to check each card. */
-
+function containsQueenOfHearts(cards) {
+  for (let i = 0; i < cards.length; i++) {
+    if (cards[i].suit == "hearts" && cards[i].rank == 12) {
+      return true;
+    }
+  }
+  return false;
+}
    
 
 /* Define a function `getHighCard()` that takes in an array of "card" objects
   and returns the card object with the highest value. The "high card" is the one
   with the highest rank. Cards of different suits but the same rank are 
   considered to have the same value, and either is a valid result */
-
+function getHighCard(cards) {
+  let highCard = cards[0];
+  for (let i = 1; i < cards.length; i++) {
+    if (cards[i].rank > highCard.rank) {
+      highCard = cards[i];
+    }
+  }
+  return highCard;
+}
   
 
 /* Define a function `isFlush()` that takes in an array of "card" objects and
    returns whether or not the cards all have the same _suit_. */
-
+function isFlush(cards) {
+  for (let i = 1; i < cards.length; i++) {
+    if (cards[i].suit != cards[i - 1].suit) {
+      return false;
+    }
+  }
+  return true;
+}
    
 
 /* Extra challenge: define a function `hasPair()` that takes in an array of 
